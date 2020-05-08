@@ -9,6 +9,9 @@
 import UIKit
 
 class SongCell: UITableViewCell {
+    var song: SongEntity? = nil
+    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var artist: UILabel!
     @IBOutlet weak var albumImage: UIImageView!
     @IBOutlet weak var track: UILabel!

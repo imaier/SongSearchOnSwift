@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE3FBED92465B87600A8B4FF /* CachedImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3FBED82465B87600A8B4FF /* CachedImageLoader.swift */; };
 		FA4D3EFE2462B472009C71A2 /* SongCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D3EFD2462B472009C71A2 /* SongCell.swift */; };
 		FA4D3F002462F4D8009C71A2 /* SongEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D3EFF2462F4D8009C71A2 /* SongEntity.swift */; };
 		FA4FC20E24619E2F004841A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4FC20D24619E2F004841A0 /* AppDelegate.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE3FBED82465B87600A8B4FF /* CachedImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedImageLoader.swift; sourceTree = "<group>"; };
 		FA4D3EFD2462B472009C71A2 /* SongCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongCell.swift; sourceTree = "<group>"; };
 		FA4D3EFF2462F4D8009C71A2 /* SongEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongEntity.swift; sourceTree = "<group>"; };
 		FA4FC20A24619E2F004841A0 /* SongSearchOnSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SongSearchOnSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,6 +65,7 @@
 				FA4FC21124619E30004841A0 /* Main.storyboard */,
 				FA4D3EFF2462F4D8009C71A2 /* SongEntity.swift */,
 				FA4D3EFD2462B472009C71A2 /* SongCell.swift */,
+				CE3FBED82465B87600A8B4FF /* CachedImageLoader.swift */,
 				FA4FC21424619E49004841A0 /* Assets.xcassets */,
 				FA4FC21624619E49004841A0 /* LaunchScreen.storyboard */,
 				FA4FC21924619E49004841A0 /* Info.plist */,
@@ -141,6 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE3FBED92465B87600A8B4FF /* CachedImageLoader.swift in Sources */,
 				FA4FC21024619E2F004841A0 /* ViewController.swift in Sources */,
 				FA4D3EFE2462B472009C71A2 /* SongCell.swift in Sources */,
 				FA4FC20E24619E2F004841A0 /* AppDelegate.swift in Sources */,

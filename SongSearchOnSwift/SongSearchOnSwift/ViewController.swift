@@ -18,30 +18,39 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDelegate
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.count > 5 {
-            let urlOpt = URL(string: "https://itunes.apple.com/search?term=\(searchText)")
-            if let url = urlOpt {
-                let task = URLSession.shared.dataTask(with: url ) { (data :Data?, response: URLResponse?, error: Error?) in
-                    if let data = data {
-                        let searchResults: NSDictionary = try! JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions()) as! NSDictionary
-                        
-                        let results = searchResults.value(forKey: "results") as! NSArray
-                        //let results: NSDictionary = searchResults["results"]
-                        var list = Array<SongEntity>();
-                        
-                        for (i, result) in results.enumerated() {
-                            let dict = result as! Dictionary<String, Any>
-                            list.append(SongEntity(with: dict))
-                        }
-                        
-                        DispatchQueue.main.async {
-                            self.ladedData = list
-                            //self.ladedData = searchResults.value(forKey: "results") as! Array
-                            self.tableView.reloadData();
-                        }
+            self.search(withText: searchText)
+        }
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let text = searchBar.text {
+            self.search(withText: text)
+        }
+    }
+    
+    func search(withText text:String) -> Void {
+        let urlOpt = URL(string: "https://itunes.apple.com/search?term=\(text)")
+        if let url = urlOpt {
+            let task = URLSession.shared.dataTask(with: url ) { (data :Data?, response: URLResponse?, error: Error?) in
+                if let data = data {
+                    let searchResults: NSDictionary = try! JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions()) as! NSDictionary
+                    
+                    let results = searchResults.value(forKey: "results") as! NSArray
+                    //let results: NSDictionary = searchResults["results"]
+                    var list = Array<SongEntity>();
+                    
+                    for (_, result) in results.enumerated() {
+                        let dict = result as! Dictionary<String, Any>
+                        list.append(SongEntity(with: dict))
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.ladedData = list
+                        self.tableView.reloadData();
                     }
                 }
-                task.resume();
             }
+            task.resume();
         }
     }
     
@@ -60,18 +69,25 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDelegate
         
         let songData = self.ladedData[indexPath.row]
 
-        
-        
         if let songCell = cell as? SongCell {
-            //songCell.artist?.text = songData["artistName"] as? String
-            //songCell.track?.text = songData["trackName"] as? String
+            
+            songCell.song = songData
             songCell.artist?.text = songData.artist
             songCell.track?.text = songData.track
+            songCell.albumImage.image = nil
+            songCell.activityIndicator.startAnimating()
+            songCell.activityIndicator.isHidden = false
+            //songCell.backgroundColor = UIColor.gray
+            
+            CachedImageLoader.shared.loadImage(url: songData.albomUrl) { (url:String, image: UIImage?) in
+                if url == songCell.song?.albomUrl {
+                    if let img = image {
+                        songCell.albumImage.image = img
+                    }
+                    songCell.activityIndicator.stopAnimating();
+                }
+            }
         }
-        
-        
-        // Configure the cell’s contents.
-        //cell.textLabel!.text = "Cell text"
         
         return cell
     }
