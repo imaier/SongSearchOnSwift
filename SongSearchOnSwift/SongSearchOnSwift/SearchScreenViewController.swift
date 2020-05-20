@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
+class SearchScreenViewController: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
     var ladedData = [SongEntity]();
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
@@ -79,7 +79,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDelegate
             songCell.activityIndicator.isHidden = false
             //songCell.backgroundColor = UIColor.gray
             
-            CachedImageLoader.shared.loadImage(url: songData.albomUrl) { (url:String, image: UIImage?) in
+            CachedDataLoader.shared.loadImage(url: songData.albomUrl) { (url:String, image: UIImage?) in
                 if url == songCell.song?.albomUrl {
                     if let img = image {
                         songCell.albumImage.image = img
@@ -90,6 +90,21 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDelegate
         }
         
         return cell
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        /*if let idSting = segue.identifier {
+            if idSting == "ShowSongDetails" {
+                let vc = segue.destination as! DetailsScreenViewController
+                let cell = sender as? SongCell
+                vc.song = cell?.song
+            }
+        }*/
+        
+        if let vc = segue.destination as? DetailsScreenViewController {
+            let cell = sender as? SongCell
+            vc.song = cell?.song
+        }
     }
 }
 

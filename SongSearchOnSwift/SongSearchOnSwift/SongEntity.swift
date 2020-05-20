@@ -13,6 +13,8 @@ struct SongEntity {
     var album = ""
     var artist = ""
     var albomUrl = ""
+    var previewUrl = ""
+    
     
     init(with dict:Dictionary<String, Any>) {
         
@@ -28,11 +30,9 @@ struct SongEntity {
         if let str = dict["artworkUrl100"] as? String {
             self.albomUrl = str
         }
-       
-        //self.track = dict["trackName"] as! String
-        //self.album = dict["collectionName"] as! String
-        //self.artist = dict["artistName"] as! String
-        //self.albomUrl = dict["artworkUrl100"] as! String
+        if let str = dict["previewUrl"] as? String {
+            self.previewUrl = str
+        }
     }
     
 }
